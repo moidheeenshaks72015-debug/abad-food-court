@@ -1,38 +1,26 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
-from datetime import datetime
+from pydantic import BaseModel
 
 app = FastAPI()
 
-# Enable CORS so your Frontend can talk to your Backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with your actual frontend URL
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# MongoDB Connection
-MONGO_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
-client = AsyncIOMotorClient(MONGO_URL)
-db = client.abad_food_court
-
 class ContactForm(BaseModel):
     name: str
-    email: EmailStr
+    phone: str
     message: str
 
-@app.get("/api/status")
-async def get_status():
-    return {"status": "online", "timestamp": datetime.now()}
+@app.get("/")
+def read_root():
+    return {"status": "Abad Food Court API is running"}
 
-@app.post("/api/contact")
-async def post_contact(form: ContactForm):
-    try:
-        result = await db.contacts.insert_one(form.dict())
-        return {"success": True, "id": str(result.inserted_id)}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail="Database Error")
+@app.post("/contact")
+async def contact(form: ContactForm):
+    # This is a placeholder for your DB logic
+    return {"message": "Success"}

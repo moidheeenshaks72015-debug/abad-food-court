@@ -1,20 +1,9 @@
 {
-  "name": "abad-food-court",
-  "private": true,
+  "name": "abad-food-court-frontend",
   "version": "0.1.0",
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "lucide-react": "^0.263.1"
-  },
+  "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "mkdir -p dist && cp public/index.html dist/index.html",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "start": "echo 'Simple static host'",
+    "build": "mkdir -p dist && cp index.html dist/index.html"
   }
 }
